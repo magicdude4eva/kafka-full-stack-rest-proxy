@@ -1,0 +1,137 @@
+#
+# Local full-stack docker-compose where you have Zookeeper, Kafka, Schema-registry (and UI) and Topics (UI)
+# This solves the networking hurdles that comes with Docker/docker-compose and should work across all platforms
+# 
+# Setup- Create the following directories:
+# mkdir -p zookeeper/data zookeeper/datalog kafka/data
+#
+# Start
+# export DOCKER_HOST_IP=127.0.0.1; docker-compose up
+#
+# Start via Docker-Toolbox
+# export DOCKER_HOST_IP=192.168.99.100
+#
+# UI's:
+# Schema registry UI: http://localhost:8001/
+# Topics UI: http://localhost:8000/
+# Zoonavigator: http://localhost:8004/ --- connect via: zookeeper:2181
+#
+# Zookeeper: $DOCKER_HOST_IP:2181
+# Kafka: $DOCKER_HOST_IP:9092
+# Kafka Schema Registry: $DOCKER_HOST_IP:8081
+# Kafka Rest Proxy: $DOCKER_HOST_IP:8082
+#
+# https://github.com/magicdude4eva/kafka-full-stack-rest-proxy
+# Copyright (c) 2019 Gerd Naschenweng
+# The MIT License (MIT)
+# @author Gerd Naschenweng <gerd@naschenweng.info>
+# @link https://www.naschenweng.info/
+#
+
+version: '2.1'
+
+services:
+  zookeeper:
+    image: zookeeper:latest
+    restart: unless-stopped
+    hostname: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+        ZOO_MY_ID: 1
+        ZOO_PORT: 2181
+        ZOO_SERVERS: server.1=zookeeper:2888:3888
+    volumes:
+      - ./zookeeper/data:/data
+      - ./zookeeper/datalog:/datalog
+
+  kafka:
+    image: confluentinc/cp-kafka
+    hostname: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka:19092,LISTENER_DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_BROKER_ID: 1
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    volumes:
+      - ./kafka/data:/var/lib/kafka/data
+    depends_on:
+      - zookeeper
+
+  kafka-schema-registry:
+    image: confluentinc/cp-schema-registry:latest
+    hostname: kafka-schema-registry
+    ports:
+      - "8081:8081"
+    environment:
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:19092
+      SCHEMA_REGISTRY_HOST_NAME: kafka-schema-registry
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+    depends_on:
+      - zookeeper
+      - kafka
+
+  schema-registry-ui:
+    image: landoop/schema-registry-ui:latest
+    hostname: kafka-schema-registry-ui
+    ports:
+      - "8001:8000"
+    environment:
+      SCHEMAREGISTRY_URL: http://kafka-schema-registry:8081/
+      PROXY: "true"
+    depends_on:
+      - kafka-schema-registry
+
+  kafka-rest-proxy:
+    image: confluentinc/cp-kafka-rest:latest
+    hostname: kafka-rest-proxy
+    ports:
+      - "8082:8082"
+    environment:
+      # KAFKA_REST_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_REST_LISTENERS: http://0.0.0.0:8082/
+      KAFKA_REST_SCHEMA_REGISTRY_URL: http://kafka-schema-registry:8081/
+      KAFKA_REST_HOST_NAME: kafka-rest-proxy
+      KAFKA_REST_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:19092
+    depends_on:
+      - zookeeper
+      - kafka
+      - kafka-schema-registry
+
+  kafka-topics-ui:
+    image: landoop/kafka-topics-ui:latest
+    hostname: kafka-topics-ui
+    ports:
+      - "8000:8000"
+    environment:
+      KAFKA_REST_PROXY_URL: "http://kafka-rest-proxy:8082/"
+      PROXY: "true"
+    depends_on:
+      - zookeeper
+      - kafka
+      - kafka-schema-registry
+      - kafka-rest-proxy
+
+  zoonavigator-web:
+    image: elkozmon/zoonavigator-web:latest
+    ports:
+     - "8004:8000"
+    environment:
+      API_HOST: "zoonavigator-api"
+      API_PORT: 9000
+    links:
+     - zoonavigator-api
+    depends_on:
+     - zoonavigator-api
+
+  zoonavigator-api:
+    image: elkozmon/zoonavigator-api:latest
+    environment:
+      SERVER_HTTP_PORT: 9000
+    depends_on:
+      - zookeeper
