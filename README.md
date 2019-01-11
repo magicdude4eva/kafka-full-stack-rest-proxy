@@ -1,4 +1,4 @@
-# kafka-full-stack-rest-proxy
+# Full-stack Docker compose with Kafka, Zookeeper, Schema-registry and UI's
 Local full-stack docker-compose where you have Zookeeper, Kafka, Schema-registry (and UI) and Topics (UI). This solves the networking hurdles that comes with Docker/docker-compose and should work across all platforms
 
 ## Setup
