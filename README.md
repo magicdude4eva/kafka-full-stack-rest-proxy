@@ -14,3 +14,37 @@ The following UI's are part of this:
 * Topics UI: http://localhost:8000/
 * Zoonavigator: http://localhost:8004/ (connect via: zookeeper:2181)
 
+## Example commands
+Install OS X Kafka client and jq:
+```brew install kafka jq```
+
+### View subjects
+$ curl --silent -X GET http://localhost:8081/subjects/ | jq .
+
+### View subject
+$ curl --silent -X GET http://localhost:8081/subjects/####/versions/latest | jq .
+
+### View via schema-id
+$ curl --silent -X GET http://localhost:8081/schemas/ids/1 | jq .
+
+### Deletes all schema versions registered under the subject "Kafka-value"
+$ curl -X DELETE http://localhost:8081/subjects/Kafka-value
+
+### Deletes version 1 of the schema registered under subject "Kafka-value"
+$ curl -X DELETE http://localhost:8081/subjects/Kafka-value/versions/1
+
+### Deletes the most recently registered schema under subject "Kafka-value"
+$ curl -X DELETE http://localhost:8081/subjects/Kafka-value/versions/latest
+
+# Kafka - Create a topic
+$ kafka-topics --zookeeper localhost:2181 --create --topic example-topic --partitions 1 --replication-factor 1
+$ kafka-topics --zookeeper localhost:2181 --list
+
+### Kafka - Create a consumer
+$ kafka-console-consumer --topic example-topic --from-beginning --bootstrap-server localhost:9092
+
+### Kafka - Produce message
+$ kafka-console-producer --topic example-topic --broker-list localhost:9092
+```
+> {"event":"EXAMPLE", "data":{"id":"123", "name":"Piotr"}, "metadata":{"version":"001"}, "timestamp":"2017-11-05T00:00:00Z" }
+```
