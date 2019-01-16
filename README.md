@@ -8,6 +8,11 @@ Create the following directories:
 ## Run it
 Via ```export DOCKER_HOST_IP=127.0.0.1; docker-compose up```
 
+## Endpoints:
+* Zookeeper: $DOCKER_HOST_IP:2181
+* Kafka: $DOCKER_HOST_IP:9092
+* Kafka Rest Proxy: $DOCKER_HOST_IP:8082
+
 ## UI's:
 The following UI's are part of this:
 * Schema registry UI: http://localhost:8001/
