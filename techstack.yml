@@ -1,0 +1,29 @@
+repo_name: magicdude4eva/kafka-full-stack-rest-proxy
+report_id: 8f9b4d5d3a532880f06d9c3b748ee3aa
+repo_type: Public
+timestamp: '2023-11-09T17:57:59+00:00'
+requested_by: magicdude4eva
+provider: github
+branch: master
+detected_tools_count: 2
+tools:
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source: Repo Metadata
+- name: Zookeeper
+  description: Because coordinating distributed systems is a Zoo
+  website_url: http://zookeeper.apache.org/
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Open Source Service Discovery
+  image_url: https://img.stackshare.io/service/1528/apache-zookeeper.png
+  detection_source: docker-compose.yml
+  last_updated_by: magicdude4eva
+  last_updated_on: 2019-01-11 08:55:12.000000000 Z
