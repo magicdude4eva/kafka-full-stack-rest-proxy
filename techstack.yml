@@ -1,12 +1,47 @@
 repo_name: magicdude4eva/kafka-full-stack-rest-proxy
-report_id: 8f9b4d5d3a532880f06d9c3b748ee3aa
+report_id: 158806cd19e85d64135fa6277e3a4ad8
 repo_type: Public
-timestamp: '2023-11-09T17:57:59+00:00'
+timestamp: '2023-12-14T09:51:21+00:00'
 requested_by: magicdude4eva
 provider: github
 branch: master
-detected_tools_count: 2
+detected_tools_count: 5
 tools:
+- name: Kafka
+  description: Distributed, fault tolerant, high throughput pub-sub messaging system
+  website_url: http://kafka.apache.org/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Message Queue
+  image_url: https://img.stackshare.io/service/1063/kazUJooF_400x400.jpg
+  detection_source: docker-compose.yml
+  last_updated_by: magicdude4eva
+  last_updated_on: 2019-01-11 08:55:12.000000000 Z
+- name: Kafka REST
+  description: A RESTful interface to a Kafka cluster
+  website_url: https://github.com/confluentinc/kafka-rest
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Kafka Tools
+  image_url: https://img.stackshare.io/service/8938/default_952e19080b823dcfc14ef0508ae6a783d35224f6.png
+  detection_source: docker-compose.yml
+  last_updated_by: magicdude4eva
+  last_updated_on: 2019-01-11 08:55:12.000000000 Z
+- name: Docker Compose
+  description: Define and run multi-container applications with Docker
+  website_url: https://github.com/docker/compose
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Container Tools
+  image_url: https://img.stackshare.io/service/3136/docker-compose.png
+  detection_source: docker-compose.yml
+  last_updated_by: magicdude4eva
+  last_updated_on: 2019-01-11 08:55:12.000000000 Z
 - name: Git
   description: Fast, scalable, distributed revision control system
   website_url: http://git-scm.com/
