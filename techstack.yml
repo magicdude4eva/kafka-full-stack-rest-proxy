@@ -1,7 +1,8 @@
 repo_name: magicdude4eva/kafka-full-stack-rest-proxy
-report_id: cb381b4a4d144a18298f343ed5c9d985
+report_id: 8f9b4d5d3a532880f06d9c3b748ee3aa
+version: 0.1
 repo_type: Public
-timestamp: '2023-12-14T12:24:21+00:00'
+timestamp: '2024-01-11T12:35:51+00:00'
 requested_by: magicdude4eva
 provider: github
 branch: master
@@ -16,6 +17,7 @@ tools:
   category: Data Stores
   sub_category: Message Queue
   image_url: https://img.stackshare.io/service/1063/kazUJooF_400x400.jpg
+  detection_source_url: https://github.com/magicdude4eva/kafka-full-stack-rest-proxy/blob/master/docker-compose.yml
   detection_source: docker-compose.yml
   last_updated_by: magicdude4eva
   last_updated_on: 2019-01-11 08:55:12.000000000 Z
@@ -27,6 +29,7 @@ tools:
   category: Data Stores
   sub_category: Kafka Tools
   image_url: https://img.stackshare.io/service/8938/default_952e19080b823dcfc14ef0508ae6a783d35224f6.png
+  detection_source_url: https://github.com/magicdude4eva/kafka-full-stack-rest-proxy/blob/master/docker-compose.yml
   detection_source: docker-compose.yml
   last_updated_by: magicdude4eva
   last_updated_on: 2019-01-11 08:55:12.000000000 Z
@@ -39,6 +42,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Container Tools
   image_url: https://img.stackshare.io/service/3136/docker-compose.png
+  detection_source_url: https://github.com/magicdude4eva/kafka-full-stack-rest-proxy/blob/master/docker-compose.yml
   detection_source: docker-compose.yml
   last_updated_by: magicdude4eva
   last_updated_on: 2019-01-11 08:55:12.000000000 Z
@@ -50,6 +54,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Version Control System
   image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/magicdude4eva/kafka-full-stack-rest-proxy
   detection_source: Repo Metadata
 - name: Zookeeper
   description: Because coordinating distributed systems is a Zoo
@@ -59,6 +64,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Open Source Service Discovery
   image_url: https://img.stackshare.io/service/1528/apache-zookeeper.png
+  detection_source_url: https://github.com/magicdude4eva/kafka-full-stack-rest-proxy/blob/master/docker-compose.yml
   detection_source: docker-compose.yml
   last_updated_by: magicdude4eva
   last_updated_on: 2019-01-11 08:55:12.000000000 Z
