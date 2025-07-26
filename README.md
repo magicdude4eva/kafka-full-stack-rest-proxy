@@ -65,7 +65,7 @@ $ kafka-console-producer --topic example-topic --broker-list localhost:9092
 (BAT)    0xb83c3Fe378F5224fAdD7a0f8a7dD33a6C96C422C
 (LTC)    MQxRAfhVU84KDVUqnZ5eV9MGyyaBEcQeDf
 (Ripple) rKV8HEL3vLc6q9waTiJcewdRdSFyx67QFb (Tag: 1172047832)
-(XLM)    GB67TJFJO3GUA432EJ4JTODHFYSBTM44P4XQCDOFTXJNNPV2UKUJYVBF (Memo ID: 1406379394)
+(XLM)    GB67TJFJO3GUA432EJ4JTODHFYSBTM44P4XQCDOFTXJNNPV2UKUJYVBF (Memo ID: 1406
 ```
 
 Go to [Curve.com to add your Crypto.com card to ApplePay](https://www.curve.com/join#DWPXKG6E) and signup to [Crypto.com for a staking and free Crypto debit card](https://crypto.com/app/ref6ayzqvp).
